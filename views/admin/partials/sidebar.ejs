@@ -6,8 +6,8 @@
 
     <nav id="compactSidebar">
         <ul class="menu-categories">
-            <li class="menu active">
-                <a href="#dashboard" data-active="true" class="menu-toggle">
+            <li class="menu ">
+                <a href="#dashboard" data-active="false" class="menu-toggle">
                     <div class="base-menu">
                         <div class="base-icons">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -26,40 +26,66 @@
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             </li>
-            <li class="menu">
-                <a href="#dashboard2" data-active="false" class="menu-toggle">
-                    <div class="base-menu">
-                        <div class="base-icons">
+
+            <% if ("/category/index"==page) { %>
+                <li class="menu active">
+                    <% } else { %>
+                <li class="menu">
+
+                    <% } %>
+                        <a href="" data-active="false" class="menu-toggle">
+                            <div class="base-menu">
+                                <div class="base-icons">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        class="bi bi-collection-fill" viewBox="0 0 16 16" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z" />
+                                    </svg>
+                                </div>
+                                <span>Categories</span>
+                            </div>
+                        </a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-chevron-left">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                </li>
+                <!-- Books -->
+                <% if ("/books/index"==page) { %>
+                    <li class="menu active">
+                        <% } else { %>
+                    <li class="menu">
+
+                        <% } %>
+                            <a href="" data-active="false" class="menu-toggle">
+                                <div class="base-menu">
+                                    <div class="base-icons">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                            class="bi bi-collection-fill" viewBox="0 0 16 16" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z" />
+                                        </svg>
+                                    </div>
+                                    <span>Categories</span>
+                                </div>
+                            </a>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-cpu">
-                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                                <rect x="9" y="9" width="6" height="6"></rect>
-                                <line x1="9" y1="1" x2="9" y2="4"></line>
-                                <line x1="15" y1="1" x2="15" y2="4"></line>
-                                <line x1="9" y1="20" x2="9" y2="23"></line>
-                                <line x1="15" y1="20" x2="15" y2="23"></line>
-                                <line x1="20" y1="9" x2="23" y2="9"></line>
-                                <line x1="20" y1="14" x2="23" y2="14"></line>
-                                <line x1="1" y1="9" x2="4" y2="9"></line>
-                                <line x1="1" y1="14" x2="4" y2="14"></line>
+                                stroke-linejoin="round" class="feather feather-chevron-left">
+                                <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
-                        </div>
-                        <span>Apps</span>
-                    </div>
-                </a>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-chevron-left">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-            </li>
+                    </li>
 
 
         </ul>
     </nav>
 
-    <div id="compact_submenuSidebar" class="submenu-sidebar">
+    <!-- <div id="compact_submenuSidebar" class="submenu-sidebar">
 
         <div class="submenu" id="dashboard2">
             <ul class="submenu-list" data-parent-element="#dashboard2">
@@ -76,7 +102,7 @@
                 </li>
             </ul>
         </div>
-        <div class="submenu" id="dashboard">
+        <div class="submenu" id="categ">
             <ul class="submenu-list" data-parent-element="#dashboard">
                 <li class="active">
                     <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -99,6 +125,6 @@
         </div>
 
 
-    </div>
+    </div> -->
 
 </div>

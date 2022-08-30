@@ -9,16 +9,15 @@ class CategoryController {
 
     static async index(req, res) {
         const categories = await Category.getAll();
-
-        res.render("admin/category/index", { categories: categories })
+        res.render("admin/category/index", { categories: categories, page: req.url })
     }
-    static store(req, res) {
+    static async store(req, res) {
 
         const data = {
             name: req.body.name,
             image: req.file.filename
         }
-        Category.createCategory(data);
+        await Category.createCategory(data);
         res.redirect("/category/index");
 
     }

@@ -18,6 +18,7 @@ var upload = multer({ storage: storage });
 
 
 const CategoryController = require("../controllers/CategoryController")
+const BookController = require("../controllers/BookController")
 
 
 
@@ -49,12 +50,17 @@ router.get("/dashboard", ensureIsAuth, (req, res) => {
 
     res.render('admin/dashboard',)
 })
-// category routes
 
+// category routes
 router.get("/category/index", CategoryController.index);
 router.post("/category/store", upload.single('image'), CategoryController.store)
 router.post("/category/update/:id", upload.single('image'), CategoryController.update)
 router.get("/category/delete/:id", CategoryController.delete)
 
+// books routes
+router.get("/books/index", BookController.index);
+router.post("/books/store", upload.single('image'), BookController.store);
+router.post("/books/update/:id", upload.single('image'), BookController.update);
+router.get("/books/delete/:id", BookController.delete);
 
 module.exports = router;

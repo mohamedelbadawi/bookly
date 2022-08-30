@@ -1,0 +1,290 @@
+<div class="layout-px-spacing">
+
+    <div class="page-header">
+        <div class="page-title">
+            <h3>books</h3>
+        </div>
+    </div>
+
+    <div class="row layout-top-spacing" id="cancel-row">
+        <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+
+            <div class="d-flex justify-content-end m-2">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#createModal">Create
+                    Book
+                </button>
+            </div>
+            <div class="widget-content widget-content-area br-6">
+                <div class="table-responsive mb-4 mt-4">
+
+                    <table id="range-search" class="display table " style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>image</th>
+                                <th>Name</th>
+                                <th>description</th>
+                                <th>author</th>
+                                <th>Dowloads</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < books.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= books[i].id %>
+                                    </td>
+                                    <td>
+                                        <img src="/images/<%= books[i].image %>" alt="" style="width: 75px;">
+                                    </td>
+                                    <td>
+                                        <%= books[i].name %>
+                                    </td>
+                                    <td>
+                                        <%= books[i].description %>
+                                    </td>
+                                    <td>
+                                        <%= books[i].author %>
+                                    </td>
+                                    <td>
+                                        <%= books[i].downloads %>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="dropdown custom-dropdown">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink6"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-more-horizontal">
+                                                    <circle cx="12" cy="12" r="1"></circle>
+                                                    <circle cx="19" cy="12" r="1"></circle>
+                                                    <circle cx="5" cy="12" r="1"></circle>
+                                                </svg>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink6">
+
+                                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
+                                                    data-target="#editModal-<%= books[i].id %>">Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    data-target="#deleteModal-<%= books[i].id%>"
+                                                    data-toggle="modal">Delete</a>
+                                            </div>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                                <% } %>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>id</th>
+                                <th>image</th>
+                                <th>Name</th>
+                                <th>description</th>
+                                <th>author</th>
+                                <th>Dowloads</th>
+
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- create modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" action="store" method="post" enctype="multipart/form-data">
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-4">
+                            <label for="validationCustom01">Name</label>
+                            <input type="text" class="form-control" id="validationCustom01" placeholder="name" required
+                                name="name">
+                        </div>
+
+
+                        <div class="col-md-12 mb-4">
+                            <label for="validationCustom01">Author</label>
+                            <input type="text" class="form-control" id="validationCustom01" placeholder="Author name"
+                                required name="author">
+                        </div>
+
+
+                        <div class="col-md-12 mb-4">
+                            <label for="validationCustom01">Description</label>
+                            <textarea type="text" class="form-control" id="validationCustom01" placeholder="Description"
+                                required name="description">
+                        </textarea>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="validationCustom01">Dowload link</label>
+                            <input type="text" class="form-control" id="validationCustom01" placeholder="download link"
+                                required name="link">
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="validationCustom01">Category</label>
+                            <select type="text" class="form-control" id="validationCustom01" placeholder="Category"
+                                required name="category">
+                                <% for(var i=0; i < categories.length; i++) { %>
+
+                                    <option value="<%=categories[i].id%>">
+                                        <%= categories[i].name %>
+                                    </option>
+                                    <% } %>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-m-12 mt-1 mb-4">
+
+                        <label for="">Image</label>
+                        <div class="custom-file" style="width:100% ;">
+                            <input type="file" class="custom-file-input" name="image" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- end create modal -->
+<!-- start edit modal -->
+<% books.forEach((book,index)=> {%>
+
+
+    <div class="modal fade" id="editModal-<%=book.id  %>" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Book</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" action="update/<%=book.id  %>" method="post" enctype="multipart/form-data">
+
+                        <div class="form-row">
+                            <div class="col-md-12 mb-4">
+                                <label for="validationCustom01">Name</label>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="name"
+                                    required name="name" value="<%= book.name %> ">
+                            </div>
+
+
+                            <div class="col-md-12 mb-4">
+                                <label for="validationCustom01">Author</label>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Author name" required name="author" value="<%= book.author %> ">
+                            </div>
+
+
+                            <div class="col-md-12 mb-4">
+                                <label for="validationCustom01">Description</label>
+                                <textarea type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Description" required name="description">
+                                    <%= book.description %> 
+                            </textarea>
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <label for="validationCustom01">Dowload link</label>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="download link" required name="link" value="<%= book.link %> ">
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <label for="validationCustom01">Category</label>
+                                <select type="text" class="form-control" id="validationCustom01" placeholder="Category"
+                                    required name="category">
+                                    <% for(var i=0; i < categories.length; i++) { %>
+
+                                        <option value="<%=categories[i].id%>" <% var selected=(
+                                            categories[i].id==book.categoryId ) ? "selected" : "" ; %>
+                                            <%=selected %> >
+                                                <%= categories[i].name %>
+                                        </option>
+                                        <% } %>
+                                </select>
+
+                            </div>
+
+                        </div>
+                        <div class="col-m-12 mt-1 mb-4">
+
+                            <label for="">Image</label>
+                            <div class="custom-file" style="width:100% ;">
+                                <input type="file" class="custom-file-input" name="image" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">update</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <% });%>
+
+        <!-- end edit modal -->
+
+        <!-- delete modal -->
+        <% for(var i=0; i < books.length; i++) { %>
+
+
+            <div class="modal fade" id="deleteModal-<%=books[i].id %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="needs-validation" action="delete/<%=books[i].id  %>" method="get">
+                                Are you sure you want to delete <%= books[i].name%> ?
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+                <!-- end edit modal -->
