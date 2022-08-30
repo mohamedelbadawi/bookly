@@ -31,7 +31,7 @@ const ensureIsAuth = (req, res, next) => {
 }
 const ensureNotAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.redirect("/home");
+        res.redirect("/dashboard");
     }
     else {
         return next();

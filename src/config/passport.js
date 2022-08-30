@@ -19,6 +19,7 @@ module.exports = (passport) => {
 
     const user = passport.use(new Strategy(options, async (req, e, p, done) => {
         // match  the user
+        console.log(req.body._csrf);
         const email = req.body.email;
         const password = req.body.password;
         const user = await prisma.user.findFirst({ where: { email } });
@@ -36,11 +37,11 @@ module.exports = (passport) => {
     }));
 
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        done(null, user);
     });
     passport.deserializeUser(async (user, done) => {
-        await prisma.user.findFirst({ where: { id: Number(user) } })
-        done(null,user)
+        await prisma.user.findFirst({ where: { id: Number(user.id) } })
+        done(null, user)
     })
 }
 

@@ -1,37 +1,36 @@
 const router = require("express").Router();
 const { generateToken } = require("../helpers/utils");
 const { ensureIsAuth } = require("../helpers/utils");
-const { ensureNotAuth  } = require("../helpers/utils");
+const { ensureNotAuth } = require("../helpers/utils");
+const { body, validationResult } = require('express-validator');
+
 const passport = require("passport");
-const connectEnsureLogin = require('connect-ensure-login');
-// router.post("/signup", (req, res, next) => {
-//     passport.authenticate("signup", { session: true }, (err, user, info) => {
-//         // Check for errors
-//         if (err) throw new Error(err);
-//         // Generate token
-//         const token = generateToken(user.id);
-//         return res.status(201).json({
-//             status: "success",
-//             data: {
-//                 message: "Account created.",
-//                 user,
-//                 token
-//             },
-//             statusCode: res.statusCode
-//         });
-//     })(req, res, next);
-// });
+var multer = require('multer');
+
+
+var storage = multer.diskStorage({
+    destination: 'public/images',
+    filename: function (req, file, cb) {
+        cb(null, "UploadedOn" + Date.now() + "fileOrigName" + file.originalname)
+    }
+})
+var upload = multer({ storage: storage });
+
+
+const CategoryController = require("../controllers/CategoryController")
+
+
 
 router.post("/login", (req, res) => {
     // console.log(req.body)
     passport.authenticate('local', {
-        successRedirect: '/home',
+        successRedirect: '/dashboard',
         failureRedirect: '/login',
     })(req, res);
 });
 
-router.get("/login",ensureNotAuth ,(req, res) => {
-    res.render('login')
+router.get("/login", ensureNotAuth, (req, res) => {
+    res.render('admin/login', { layout: 'admin/login' })
 })
 
 router.get('/logout', function (req, res, next) {
@@ -42,11 +41,20 @@ router.get('/logout', function (req, res, next) {
 });
 
 
-
-
-
-router.get("/home", ensureIsAuth,(req, res) => {
+router.get("/home", (req, res) => {
     res.render('home')
 })
+
+router.get("/dashboard", ensureIsAuth, (req, res) => {
+
+    res.render('admin/dashboard',)
+})
+// category routes
+
+router.get("/category/index", CategoryController.index);
+router.post("/category/store", upload.single('image'), CategoryController.store)
+router.post("/category/update/:id", upload.single('image'), CategoryController.update)
+router.get("/category/delete/:id", CategoryController.delete)
+
 
 module.exports = router;
