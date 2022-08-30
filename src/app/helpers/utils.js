@@ -23,6 +23,7 @@ const generateToken = (id) => {
 
 const ensureIsAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
+    
         return next();
     }
     else {
