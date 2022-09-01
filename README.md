@@ -2,7 +2,7 @@
 
 [![CircleCI](https://img.shields.io/circleci/project/github/contentful/the-example-app.nodejs.svg)](https://circleci.com/gh/contentful/the-example-app.nodejs)
 
-It's nodejs app for download books with admin panel
+It's MVC Nodejs app for download books with admin panel
 ### Tools and technologies
 - nodejs 
 - ejs template engine
